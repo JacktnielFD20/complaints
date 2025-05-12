@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel de Administración</title>
+</head>
+<body>
+    <p>Bienvenido, {{ session['username'] }} | <a href="/logout">Cerrar sesión</a></p>
+
+    <p>Rol: Administrador</p>
+    <p><a href="/logout">Cerrar sesión</a></p>
+
+    <h2>Lista de Reclamos</h2>
+    <ul>
+        {% for complaint in complaints %}
+            <li>
+                <strong>ID:</strong> {{ complaint[0] }} |
+                <strong>Nombre:</strong> {{ complaint[1] }} |
+                <strong>Servicio:</strong> {{ complaint[3] }} |
+                <strong>Estado:</strong> {{ complaint[5] }} <br>
+                <strong>Respuesta:</strong>
+                {% if complaint[7] %}
+                    {{ complaint[7] }}
+                {% else %}
+                    No respondido
+                {% endif %}
+                <br>
+                <em>Fecha:</em> {{ complaint[6] }}
+                <hr>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Actualizar Estado / Respuesta</h2>
+    <form method="post" action="/admin">
+        <label>ID del Reclamo:</label><br>
+        <input type="number" name="id" required><br><br>
+
+        <label>Nuevo Estado:</label><br>
+        <select name="status" required>
+            <option value="Pendiente">Pendiente</option>
+            <option value="En proceso">En proceso</option>
+            <option value="Resuelto">Resuelto</option>
+        </select><br><br>
+
+        <label>Respuesta al usuario:</label><br>
+        <textarea name="response" rows="4" cols="50"></textarea><br><br>
+
+        <button type="submit">Actualizar</button>
+    </form>
+</body>
+</html>

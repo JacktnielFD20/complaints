@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Consultar Estado del Reclamo</title>
+</head>
+<body>
+    <h1>Consultar Estado del Reclamo</h1>
+
+    <form action="/status" method="post">
+        <label>Correo electrónico:</label><br>
+        <input type="email" name="email" required><br><br>
+        <button type="submit">Consultar</button>
+    </form>
+
+    {% if complaints %}
+        <h2>Resultados:</h2>
+        <ul>
+            {% for complaint in complaints %}
+                <li>
+                    <strong>ID:</strong> {{ complaint[0] }} <br>
+                    <strong>Tipo de Servicio:</strong> {{ complaint[3] }} <br> <!-- Accedemos a complaint[3] -->
+                    <strong>Fecha de Envío:</strong> {{ complaint[6] }} <br> <!-- Accedemos a complaint[6] -->
+                    <strong>Estado:</strong> {{ complaint[5] }} <br> <!-- Accedemos a complaint[5] -->
+                    <strong>Respuesta:</strong>
+                    {% if complaint[7] %}
+                        {{ complaint[7] }}
+                    {% else %}
+                        Aún no se ha dado respuesta.
+                    {% endif %}
+                    <hr>
+                </li>
+            {% endfor %}
+        </ul>
+    {% elif complaints is not none %}
+        <p>No se encontraron reclamos para ese correo.</p>
+    {% endif %}
+
+    <p><a href="/">Volver al inicio</a></p>
+</body>
+</html>
