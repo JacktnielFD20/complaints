@@ -1,0 +1,188 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+header {
+    flex: 0 0 auto; /* El header ocupa solo el espacio necesario */
+    background-color: #888888;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+div.log-data {
+    display: flex;
+    justify-content: space-between;
+}
+
+div.log-data p {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0;
+}
+
+div.log-data a {
+    color: rgb(185, 185, 185);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+div.update-reclamo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main {
+    flex: 1 1 auto; /* El main ocupa el resto del espacio */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilos específicos para las páginas de inicio */
+.container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    width: 80%;
+    max-width: 800px;
+    text-align: center;
+}
+
+h1 {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+p {
+    color: #555555;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.welcome {
+color: rgb(255, 255, 255);
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+.welcome a {
+    color: rgba(211, 211, 211, 0.555);
+    font-size: 0.8rem;
+}
+
+form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+input[type="text"],
+input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+input[type="service"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Mejor estilo para dropdown (select) */
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    font-size: 1rem;
+    color: #555555;
+    appearance: none; /* Elimina el estilo predeterminado del navegador */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns%3D%22http%3A//www.w3.org/2000/svg%22 viewBox%3D%220 0 4 5%22%3E%3Cpath fill%3D%22%23cccccc%22 d%3D%22M2 0L0 2h4z%22/%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
+}
+
+select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+option {
+    padding: 10px;
+    background-color: #ffffff;
+    color: #333333;
+}
+
+/* Mejor estilo para textarea (descripción) */
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    color: #555555;
+    background-color: #ffffff;
+    resize: vertical; /* Permite redimensionar solo en la dirección vertical */
+    min-height: 100px; /* Altura mínima */
+    max-height: 300px; /* Altura máxima */
+}
+
+textarea:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+

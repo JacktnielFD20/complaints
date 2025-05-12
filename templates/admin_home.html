@@ -3,20 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Panel de Administración</title>
+    <link rel="stylesheet" href="/static/css/home_styles.css">
 </head>
 <body>
-    <p>Bienvenido, {{ session['username'] }} | <a href="/logout">Cerrar sesión</a></p>
-
+<header class="admin-header">
+<div class="log-data">
     <p>Rol: Administrador</p>
-    <p><a href="/logout">Cerrar sesión</a></p>
+    <p>Bienvenido, {{ session['username'] }} | <a href="/logout">Cerrar sesión</a></p>
+</div>
+    <h1>Panel de Administración</h1>
 
+</header>
     <h2>Lista de Reclamos</h2>
     <ul>
         {% for complaint in complaints %}
             <li>
                 <strong>ID:</strong> {{ complaint[0] }} |
                 <strong>Nombre:</strong> {{ complaint[1] }} |
+                <strong>Correo:</strong> {{ complaint[2] }} |
                 <strong>Servicio:</strong> {{ complaint[3] }} |
+                <strong>Descripción:</strong> {{ complaint[4] }} |
                 <strong>Estado:</strong> {{ complaint[5] }} <br>
                 <strong>Respuesta:</strong>
                 {% if complaint[7] %}
@@ -31,7 +37,8 @@
         {% endfor %}
     </ul>
 
-    <h2>Actualizar Estado / Respuesta</h2>
+   <div class="update-reclamo">
+     <h2>Actualizar Estado / Respuesta</h2>
     <form method="post" action="/admin">
         <label>ID del Reclamo:</label><br>
         <input type="number" name="id" required><br><br>
@@ -48,5 +55,6 @@
 
         <button type="submit">Actualizar</button>
     </form>
+   </div>
 </body>
 </html>

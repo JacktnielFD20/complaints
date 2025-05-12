@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Inicio del Usuario</title>
+    <link rel="stylesheet" href="/static/css/home_styles.css">
 </head>
 <body>
-    <p>Bienvenido, {{ session['username'] }} | <a href="/logout">Cerrar sesión</a></p>
+<header>
+        <p class="welcome">Bienvenido, {{ session['username'] }} | <a href="/logout">Cerrar sesión</a></p>
 
     <h1>Bienvenido al Sistema de Reclamos</h1>
+</header>
+ <main>
     <p>¿Qué desea hacer?</p>
     
     <ul>
@@ -35,5 +39,6 @@
 
         <button type="submit">Enviar Reclamo</button>
     </form>
+ </main>
 </body>
 </html>
