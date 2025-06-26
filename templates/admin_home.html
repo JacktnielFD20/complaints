@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Panel de Administración</title>
     <link rel="stylesheet" href="/static/css/home_styles.css">
+    <link rel="stylesheet" href="/static/css/admin_home.css">
 </head>
 <body>
 <header class="admin-header">
@@ -11,50 +12,70 @@
     <p>Rol: Administrador</p>
     <p>Bienvenido, {{ session['username'] }} | <a href="/logout">Cerrar sesión</a></p>
 </div>
-    <h1>Panel de Administración</h1>
-
+    <div style="display: flex; align-items: center; justify-content: center; gap: 16px;">
+        <img src="/images/admin.png" alt="Admin" style="width: 48px; height: 48px; object-fit: contain;">
+        <h1 style="margin: 0;">Panel de Administración</h1>
+    </div>
 </header>
     <h2>Lista de Reclamos</h2>
-    <ul>
+    <table class="complaints-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Usuario</th>
+                <th>Servicio</th>
+                <th>Descripción</th>
+                <th>Estado</th>
+                <th>Respuesta</th>
+                <th>Fecha</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
         {% for complaint in complaints %}
-            <li>
-                <strong>ID:</strong> {{ complaint[0] }} |
-                <strong>Nombre:</strong> {{ complaint[1] }} |
-                <strong>Correo:</strong> {{ complaint[2] }} |
-                <strong>Servicio:</strong> {{ complaint[3] }} |
-                <strong>Descripción:</strong> {{ complaint[4] }} |
-                <strong>Estado:</strong> {{ complaint[5] }} <br>
-                <strong>Respuesta:</strong>
-                {% if complaint[7] %}
-                    {{ complaint[7] }}
-                {% else %}
-                    No respondido
-                {% endif %}
-                <br>
-                <em>Fecha:</em> {{ complaint[6] }}
-                <hr>
-            </li>
+            <tr>
+                <td>{{ complaint[0] }}</td>
+                <td>{{ complaint[1] }}</td>
+                <td>{{ complaint[2] }}</td>
+                <td>{{ complaint[3] }}</td>
+                <td>{{ complaint[4] }}</td>
+                <td>{{ complaint[5] }}</td>
+                <td class="respuesta">
+                    {% if complaint[7] %}
+                        {{ complaint[7] }}
+                    {% else %}
+                        No respondido
+                    {% endif %}
+                </td>
+                <td>{{ complaint[6] }}</td>
+                <td><button class="responder-btn" data-id="{{ complaint[0] }}">Responder</button></td>
+            </tr>
         {% endfor %}
-    </ul>
+        </tbody>
+    </table>
 
-   <div class="update-reclamo">
-     <h2>Actualizar Estado / Respuesta</h2>
-    <form method="post" action="/admin">
-        <label>ID del Reclamo:</label><br>
-        <input type="number" name="id" required><br><br>
+    <!-- Popup para responder reclamo -->
+    <div class="popup-bg" id="popup-bg">
+        <form class="popup-form" id="popup-form" method="post" action="/admin">
+            <button type="button" class="close-btn" id="close-popup">X</button>
+            <h2>Actualizar Estado / Respuesta</h2>
+            <label>ID del Reclamo:</label><br>
+            <input type="number" name="id" id="popup-id" readonly required><br>
 
-        <label>Nuevo Estado:</label><br>
-        <select name="status" required>
-            <option value="Pendiente">Pendiente</option>
-            <option value="En proceso">En proceso</option>
-            <option value="Resuelto">Resuelto</option>
-        </select><br><br>
+            <label>Nuevo Estado:</label><br>
+            <select name="status" required>
+                <option value="Pendiente">Pendiente</option>
+                <option value="En proceso">En proceso</option>
+                <option value="Resuelto">Resuelto</option>
+            </select><br>
 
-        <label>Respuesta al usuario:</label><br>
-        <textarea name="response" rows="4" cols="50"></textarea><br><br>
+            <label>Respuesta al usuario:</label><br>
+            <textarea name="response" rows="4" cols="50"></textarea><br>
 
-        <button type="submit">Actualizar</button>
-    </form>
-   </div>
+            <button type="submit">Actualizar</button>
+        </form>
+    </div>
+    <script src="/static/js/admin_popup.js"></script>
 </body>
 </html>

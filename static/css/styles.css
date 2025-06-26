@@ -23,6 +23,10 @@ h1 {
     color: #333333;
 }
 
+header h1 {
+    color: white;
+}
+
 label {
     font-weight: bold;
     color: #555555;
@@ -74,4 +78,67 @@ select {
     border-radius: 4px;
     box-sizing: border-box;
     background-color: #ffffff;
+}
+
+/* Botones de menú de servicios */
+.service-menu-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15vh;
+    height: 100vh;
+}
+.service-buttons {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+.service-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    padding: 18px 24px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.service-btn img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+.service-btn span {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+}
+.service-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 16px rgba(0,123,255,0.15);
+    background: #eaf4ff;
+}
+.status-btn {
+    margin-top: 20px;
+    width: 340px;
+    padding: 16px;
+    font-size: 1.1rem;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.status-btn:hover {
+    background: #0056b3;
+}
+.disabled-select {
+    background: #e9ecef;
+    color: #888;
+    pointer-events: none;
 }

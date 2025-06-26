@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Selecciona un Servicio</title>
+    <link rel="stylesheet" href="/static/css/home_styles.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <header>
+        <p class="welcome">Bienvenido, {{ session['username'] }} | <a href="/logout">Cerrar sesión</a></p>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 16px;">
+            <img src="/images/queja.png" alt="Queja" style="width: 48px; height: 48px; object-fit: contain;">
+            <h1 style="margin: 0;">Bienvenido al Sistema de Reclamos</h1>
+        </div>
+    </header>
+    <div class="service-menu-container">
+        <h2>Selecciona el servicio para tu reclamo</h2>
+        <div class="service-buttons">
+            <form action="/user_home" method="get">
+                <input type="hidden" name="service" value="electricidad">
+                <button class="service-btn" type="submit">
+                    <img src="/images/electricidad.png" alt="Electricidad">
+                    <span>Electricidad</span>
+                </button>
+            </form>
+            <form action="/user_home" method="get">
+                <input type="hidden" name="service" value="agua">
+                <button class="service-btn" type="submit">
+                    <img src="/images/agua.png" alt="Agua">
+                    <span>Agua</span>
+                </button>
+            </form>
+            <form action="/user_home" method="get">
+                <input type="hidden" name="service" value="internet">
+                <button class="service-btn" type="submit">
+                    <img src="/images/wifi.png" alt="Internet">
+                    <span>Internet</span>
+                </button>
+            </form>
+        </div>
+        <form action="/status" method="get" class="status-form">
+            <button class="status-btn" type="submit">
+                <img src="/images/question.png" alt="Consultar">
+                Consultar estado de reclamos
+            </button>
+        </form>
+    </div>
+</body>
+</html>

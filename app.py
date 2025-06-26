@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session, url_for
+from flask import Flask, render_template, request, redirect, session, url_for, send_from_directory
 import sqlite3
 from datetime import datetime
 
@@ -50,29 +50,46 @@ def logout():
     return redirect(url_for('login'))
 
 
-# Página principal del usuario
+# Página de selección de servicio
+@app.route('/service_menu')
+def service_menu():
+    return render_template('service_menu.html')
+
+
+# Página principal del usuario, recibe el servicio seleccionado
+@app.route('/user_home', methods=['GET'])
+def user_home():
+    if 'role' not in session or session['role'] != 'user':
+        return redirect(url_for('login'))
+    selected_service = request.args.get('service')
+    return render_template('user_home.html', selected_service=selected_service)
+
+
+# Cambia la ruta de user_dashboard para redirigir al menú de servicios
 @app.route('/user')
 def user_dashboard():
     if 'role' not in session or session['role'] != 'user':
         return redirect(url_for('login'))
-    return render_template('user_home.html')
+    return redirect(url_for('service_menu'))
 
 
 # Registrar reclamo
 @app.route('/submit', methods=['POST'])
 def submit():
+    if 'username' not in session:
+        return redirect(url_for('login'))
     name = request.form['name']
-    email = request.form['email']
     service = request.form['service']
     description = request.form['description']
     date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    username = session['username']
 
     conn = sqlite3.connect('complaints.db')
     cursor = conn.cursor()
     cursor.execute('''
-        INSERT INTO complaints (name, email, service, description, date)
+        INSERT INTO complaints (name, username, service, description, date)
         VALUES (?, ?, ?, ?, ?)
-    ''', (name, email, service, description, date))
+    ''', (name, username, service, description, date))
     conn.commit()
     conn.close()
 
@@ -80,16 +97,16 @@ def submit():
 
 
 # Consultar estado de reclamos
-@app.route('/status', methods=['GET', 'POST'])
+@app.route('/status', methods=['GET'])
 def status():
-    complaints = None
-    if request.method == 'POST':
-        email = request.form['email']
-        conn = sqlite3.connect('complaints.db')
-        cursor = conn.cursor()
-        cursor.execute("SELECT * FROM complaints WHERE email = ?", (email,))
-        complaints = cursor.fetchall()
-        conn.close()
+    if 'username' not in session:
+        return redirect(url_for('login'))
+    username = session['username']
+    conn = sqlite3.connect('complaints.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM complaints WHERE username = ?", (username,))
+    complaints = cursor.fetchall()
+    conn.close()
     return render_template('status.html', complaints=complaints)
 
 
@@ -141,6 +158,12 @@ def register():
             return "El nombre de usuario ya existe. Intenta con otro."
 
     return render_template('register.html')
+
+
+# Servir imágenes desde la carpeta images
+@app.route('/images/<path:filename>')
+def images(filename):
+    return send_from_directory('images', filename)
 
 
 if __name__ == '__main__':

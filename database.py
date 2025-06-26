@@ -4,12 +4,12 @@ import sqlite3
 conn = sqlite3.connect('complaints.db')
 cursor = conn.cursor()
 
-# Crear tabla de reclamos
+# Crear tabla de reclamos (sin email, con username)
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS complaints (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
-    email TEXT NOT NULL,
+    username TEXT NOT NULL,
     service TEXT NOT NULL,
     description TEXT NOT NULL,
     status TEXT NOT NULL DEFAULT 'Pendiente',

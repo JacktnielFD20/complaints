@@ -4,40 +4,83 @@
     <meta charset="UTF-8">
     <title>Consultar Estado del Reclamo</title>
     <link rel="stylesheet" href="/static/css/home_styles.css">
+    <style>
+        .complaints-table {
+            width: 100%;
+            max-width: 800px;
+            margin: 30px auto;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .complaints-table th, .complaints-table td {
+            padding: 14px 10px;
+            text-align: left;
+        }
+        .complaints-table th {
+            background: #007bff;
+            color: #fff;
+            font-weight: bold;
+        }
+        .complaints-table tr:nth-child(even) {
+            background: #f4f8fc;
+        }
+        .complaints-table tr:nth-child(odd) {
+            background: #eaf1fb;
+        }
+        .complaints-table td {
+            color: #333;
+            font-size: 1rem;
+        }
+        .complaints-table td.respuesta {
+            font-style: italic;
+            color: #007bff;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Consultar Estado del Reclamo</h1>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 16px;">
+            <img src="/images/historial.png" alt="Historial" style="width:48px; height:48px; object-fit:contain;">
+            <h1 style="margin:0;">Estado de Reclamos</h1>
+        </div>
         <p><a href="/">Volver al inicio</a></p>
     </header>
     <main>
-        <form action="/status" method="post">
-            <label>Correo electrónico:</label><br>
-            <input type="email" name="email" required><br><br>
-            <button type="submit">Consultar</button>
-        </form>
-
         {% if complaints %}
             <h2>Resultados:</h2>
-            <ul>
+            <table class="complaints-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Servicio</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th>Respuesta</th>
+                    </tr>
+                </thead>
+                <tbody>
                 {% for complaint in complaints %}
-                    <li>
-                        <strong>ID:</strong> {{ complaint[0] }} <br>
-                        <strong>Tipo de Servicio:</strong> {{ complaint[3] }} <br>
-                        <strong>Fecha de Envío:</strong> {{ complaint[6] }} <br>
-                        <strong>Estado:</strong> {{ complaint[5] }} <br>
-                        <strong>Respuesta:</strong>
-                        {% if complaint[7] %}
-                            {{ complaint[7] }}
-                        {% else %}
-                            Aún no se ha dado respuesta.
-                        {% endif %}
-                        <hr>
-                    </li>
+                    <tr>
+                        <td>{{ complaint[0] }}</td>
+                        <td>{{ complaint[3] }}</td>
+                        <td>{{ complaint[6] }}</td>
+                        <td>{{ complaint[5] }}</td>
+                        <td class="respuesta">
+                            {% if complaint[7] %}
+                                {{ complaint[7] }}
+                            {% else %}
+                                Aún no se ha dado respuesta.
+                            {% endif %}
+                        </td>
+                    </tr>
                 {% endfor %}
-            </ul>
-        {% elif complaints is not none %}
-            <p>No se encontraron reclamos para ese correo.</p>
+                </tbody>
+            </table>
+        {% else %}
+            <p>No se encontraron reclamos para tu usuario.</p>
         {% endif %}
     </main>
 </body>

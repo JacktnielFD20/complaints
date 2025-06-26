@@ -4,35 +4,52 @@
     <meta charset="UTF-8">
     <title>Inicio del Usuario</title>
     <link rel="stylesheet" href="/static/css/home_styles.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
 <header>
-        <p class="welcome">Bienvenido, {{ session['username'] }} | <a href="/logout">Cerrar sesión</a></p>
-
-    <h1>Bienvenido al Sistema de Reclamos</h1>
+    <p class="welcome">Bienvenido, {{ session['username'] }} | <a href="/logout">Cerrar sesión</a></p>
+    <div class="reclamo-header">
+        {% set servicio = selected_service|default('') %}
+        {% if servicio == 'electricidad' or servicio == 'luz' %}
+            <img src="/images/electricidad.png" alt="Electricidad">
+            <h1 style="margin:0;">Reclamo de Electricidad</h1>
+        {% elif servicio == 'agua' %}
+            <img src="/images/agua.png" alt="Agua">
+            <h1 style="margin:0;">Reclamo de Agua</h1>
+        {% elif servicio == 'internet' %}
+            <img src="/images/wifi.png" alt="Internet">
+            <h1 style="margin:0;">Reclamo de Internet</h1>
+        {% elif servicio == 'alcantarillado' %}
+            <img src="/images/agua.png" alt="Alcantarillado">
+            <h1 style="margin:0;">Reclamo de Alcantarillado</h1>
+        {% else %}
+            <h1>Bienvenido al Sistema de Reclamos</h1>
+        {% endif %}
+    </div>
 </header>
  <main>
-    <p>¿Qué desea hacer?</p>
-    
-    <ul>
-        <li><a href="/status">Consultar estado de reclamos</a></li>
-    </ul>
-
-    <h2>Registrar Reclamo</h2>
+    <h2>Registrar Reclamo{% if selected_service %} - {{ selected_service|capitalize }}{% endif %}</h2>
     <form action="/submit" method="post">
         <label>Nombre:</label><br>
         <input type="text" name="name" required><br><br>
 
-        <label>Correo electrónico:</label><br>
-        <input type="email" name="email" required><br><br>
-
         <label>Tipo de servicio:</label><br>
+        {% if selected_service %}
+        <select name="service" class="disabled-select" readonly disabled>
+            <option value="{{ selected_service }}" selected>{{ selected_service|capitalize }}</option>
+        </select>
+        <input type="hidden" name="service" value="{{ selected_service }}">
+        {% else %}
         <select name="service" required>
             <option value="agua">Agua</option>
             <option value="luz">Luz</option>
+            <option value="electricidad">Electricidad</option>
             <option value="internet">Internet</option>
             <option value="alcantarillado">Alcantarillado</option>
-        </select><br><br>
+        </select>
+        {% endif %}
+        <br><br>
 
         <label>Descripción:</label><br>
         <textarea name="description" rows="4" required></textarea><br><br>

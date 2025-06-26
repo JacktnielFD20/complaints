@@ -6,20 +6,27 @@ body {
     display: flex;
     flex-direction: column;
     height: 100vh;
+    align-items: center;
 }
 
 header {
-    flex: 0 0 auto; /* El header ocupa solo el espacio necesario */
-    background-color: #888888;
+    width: 100%;
+    background-color: #005081;
     color: white;
-    padding: 10px;
+    padding: 10px 0;
     text-align: center;
     box-sizing: border-box;
+    z-index: 10;
+    margin: 0;
+    left: 0;
+    right: 0;
+    position: relative;
 }
 
 div.log-data {
     display: flex;
     justify-content: space-between;
+    margin: auto 2vw;
 }
 
 div.log-data p {
@@ -47,7 +54,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    margin-top: 10vh;
 }
 
 /* Estilos específicos para las páginas de inicio */
@@ -88,7 +95,7 @@ button:hover {
 }
 
 a {
-    color: #007bff;
+    color: rgba(211, 211, 211, 0.555);;
     text-decoration: none;
     font-weight: bold;
 }
@@ -184,5 +191,136 @@ textarea:focus {
     border-color: #007bff;
     outline: none;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Botones de menú de servicios */
+.service-menu-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.service-buttons {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+.service-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    padding: 18px 24px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: center;
+}
+.service-btn img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: 16px;
+    display: block;
+}
+.service-btn span {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 0;
+}
+.service-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 16px rgba(0,123,255,0.15);
+    background: #eaf4ff;
+}
+.status-btn {
+    margin-top: 20px;
+    width: 340px;
+    max-width: 95vw;
+    padding: 16px;
+    font-size: 1.1rem;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.status-btn img {
+    width: 28px;
+    height: 28px;
+    vertical-align: middle;
+}
+/* Ajuste para el form del botón de estado */
+.status-form {
+    width: 370px;
+    max-width: 98vw;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+}
+.disabled-select {
+    background: #e9ecef;
+    color: #888;
+    pointer-events: none;
+}
+
+/* Oculta los forms pero deja visibles los botones dentro de ellos */
+.service-menu-container form,
+.status-form {
+    background: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    width: auto !important;
+    display: inline;
+}
+.service-menu-container form > *,
+.status-form > * {
+    display: inline-block;
+}
+.service-menu-container form {
+    outline: none !important;
+}
+.service-menu-container form {
+    background: transparent !important;
+}
+
+/* Estilos para user_home.html */
+.reclamo-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+.reclamo-header img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+@media (max-width: 600px) {
+    .service-menu-container {
+        margin-top: 10px;
+    }
+    header {
+        padding: 8px 0;
+    }
 }
 
