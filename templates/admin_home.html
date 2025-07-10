@@ -8,12 +8,16 @@
 </head>
 <body>
 <header class="admin-header">
-<div class="log-data">
-    <p>Rol: Administrador</p>
-    <p>Bienvenido, {{ session['username'] }} | <a href="/logout">Cerrar sesión</a></p>
-</div>
+    <div class="reclamos-nicaragua-header">
+        <img src="/images/nicaragua_logo.png" alt="Logo Nicaragua" class="reclamos-nicaragua-logo">
+        <h3>Reclamos Nicaragua</h3>
+    </div>
+    <div class="log-data">
+        <p>Rol: Administrador</p>
+        <p>Bienvenido, {{ session['username'] }} | <a href="/logout">Cerrar sesión</a></p>
+    </div>
     <div style="display: flex; align-items: center; justify-content: center; gap: 16px;">
-        <img src="/images/admin.png" alt="Admin" style="width: 48px; height: 48px; object-fit: contain;">
+        <img src="/images/admin.png" alt="Admin" style="width: 48px; height: 48px; object-fit: contain; margin-top: 2vh;">
         <h1 style="margin: 0;">Panel de Administración</h1>
     </div>
 </header>

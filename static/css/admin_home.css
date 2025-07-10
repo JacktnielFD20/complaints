@@ -90,3 +90,27 @@
 .popup-form .close-btn:hover {
     background: #b52a37;
 }
+.reclamos-nicaragua-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 24px;
+    z-index: 2;
+}
+
+.reclamos-nicaragua-logo {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+}
+
+.admin-header {
+    position: relative;
+}
